@@ -42,7 +42,7 @@ Serotonin.tipa: $(wildcard **/*.c **/*.m **/*.swift **/*.plist **/*.xml)
 	$(MAKE) -C RootHelperSample/launchdshim/xpcproxyhook
 
 	echo "[*] Signing xpcproxyhook"
-	$(LDID) -SRootHelperSample/launchdshim/xpcproxyhook/.theos/obj/debug/xpcproxyhook.dylib
+	$(LDID) -SRootHelperSample/launchdshim/xpcproxyhook/.theos/obj/xpcproxyhook.dylib
 	$(CTBYPASS) -i RootHelperSample/launchdshim/xpcproxyhook/.theos/obj/xpcproxyhook.dylib -r -o RootHelperSample/launchdshim/xpcproxyhook/xpcproxyhook.dylib
 
 	echo "[*] Building jitter"
