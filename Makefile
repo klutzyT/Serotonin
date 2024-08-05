@@ -4,7 +4,7 @@ LDID = ldid
 MACOSX_SYSROOT = $(shell xcrun -sdk macosx --show-sdk-path)
 TARGET_SYSROOT = $(shell xcrun -sdk iphoneos --show-sdk-path)
 CFPREFSD_SHIM = RootHelperSample/launchdshim/cfprefsdshim/
-LDID = /Users/ibarahime/Downloads/ldid_macosx_arm64
+LDID = ldid
 CTBYPASS = ./ChOma_host/output/tests/ct_bypass
 
 all: Serotonin.tipa
@@ -30,24 +30,24 @@ Serotonin.tipa: $(wildcard **/*.c **/*.m **/*.swift **/*.plist **/*.xml)
 	$(MAKE) -C RootHelperSample/launchdshim/launchdhook
 	
 	echo "[*] Signing launchd hook"
-	$(CTBYPASS) -i RootHelperSample/launchdshim/launchdhook/.theos/obj/debug/launchdhook.dylib -r -o RootHelperSample/launchdshim/launchdhook/launchdhooksigned.dylib
+	$(CTBYPASS) -i RootHelperSample/launchdshim/launchdhook/.theos/obj/launchdhook.dylib -r -o RootHelperSample/launchdshim/launchdhook/launchdhooksigned.dylib
 		
 	echo "[*] Building general hook"
 	$(MAKE) -C RootHelperSample/launchdshim/generalhook
 	
 	echo "[*] Signing general hook"
-	$(CTBYPASS) -i RootHelperSample/launchdshim/generalhook/.theos/obj/debug/generalhook.dylib -r -o RootHelperSample/launchdshim/generalhook/generalhook.dylib
+	$(CTBYPASS) -i RootHelperSample/launchdshim/generalhook/.theos/obj/generalhook.dylib -r -o RootHelperSample/launchdshim/generalhook/generalhook.dylib
 	
 	echo "[*] Building xpcproxyhook"
 	$(MAKE) -C RootHelperSample/launchdshim/xpcproxyhook
 
 	echo "[*] Signing xpcproxyhook"
 	$(LDID) -SRootHelperSample/launchdshim/xpcproxyhook/.theos/obj/debug/xpcproxyhook.dylib
-	$(CTBYPASS) -i RootHelperSample/launchdshim/xpcproxyhook/.theos/obj/debug/xpcproxyhook.dylib -r -o RootHelperSample/launchdshim/xpcproxyhook/xpcproxyhook.dylib
+	$(CTBYPASS) -i RootHelperSample/launchdshim/xpcproxyhook/.theos/obj/xpcproxyhook.dylib -r -o RootHelperSample/launchdshim/xpcproxyhook/xpcproxyhook.dylib
 
 	echo "[*] Building jitter"
 	$(MAKE) -C RootHelperSample/launchdshim/launchdhook/jitter
-	$(CTBYPASS) -i RootHelperSample/launchdshim/launchdhook/jitter/.theos/obj/debug/jitter -r -o RootHelperSample/launchdshim/launchdhook/jitter/jitter
+	$(CTBYPASS) -i RootHelperSample/launchdshim/launchdhook/jitter/.theos/obj/jitter -r -o RootHelperSample/launchdshim/launchdhook/jitter/jitter
 
 	# jank workaround at best, can someone else please fix this weird file dependency? – bomberfish
 	echo "[*] Copying fastPathSign"
