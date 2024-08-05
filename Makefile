@@ -63,7 +63,7 @@ Serotonin.tipa: $(wildcard **/*.c **/*.m **/*.swift **/*.plist **/*.xml)
 	mkdir Payload
 	cp -a build/Build/Products/Release-iphoneos/Serotonin.app Payload
 	rm -rf Payload/Serotonin.app/Frameworks
-	cp RootHelperSample/.theos/obj/debug/arm64/serotoninroothelper Payload/Serotonin.app/serotoninroothelper
+	cp RootHelperSample/.theos/obj/arm64/serotoninroothelper Payload/Serotonin.app/serotoninroothelper
 	install -m755 RootHelperSample/launchdshim/launchdhook/launchdhooksigned.dylib Payload/Serotonin.app/launchdhooksigned.dylib
 	install -m755 RootHelperSample/launchdshim/generalhook/generalhook.dylib Payload/Serotonin.app/generalhooksigned.dylib
 	install -m755 RootHelperSample/launchdshim/xpcproxyhook/xpcproxyhook.dylib Payload/Serotonin.app/xpcproxyhooksigned.dylib
