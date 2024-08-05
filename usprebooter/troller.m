@@ -64,7 +64,7 @@ int userspaceReboot(void) {
         fprintf(stderr, "could not delete mmaintenanced last reboot file\n");
         return -1;
     }
-    xpc_connection_t connection = xpc_connection_create_mach_service("com.apple.mmaintenanced", NULL, 0);
+    xpc_connection_t connection = xpc_connection_create_mach_service_compat("com.apple.mmaintenanced", NULL, 0);
     if (xpc_get_type(connection) == XPC_TYPE_ERROR) {
         char* desc = xpc_copy_description((__bridge xpc_object_t _Nonnull)(xpc_get_type(connection)));
         puts(desc);
